@@ -1,0 +1,27 @@
+= README =
+Date: 2014-11-28
+
+The main purpose of this class is to set "position", "width", "visibility" and the "transition" to the pane.
+
+ID needed:
+
+{clickID}  - a unique ID for the element that activates the sliding pane
+
+{uniqueId} - a unique ID for the <div> being slide in and out
+
+Classes needed:
+
+pane_r,pane_l - one the classes for the <div>; must be assigned initially
+pane-hidden   - hides the pane when not in use; should be assigned initially
+pane-slide    - slides the pane in and out.
+
+Glue needed:
+        $('#{clickID}').click(function() {
+			SlidingPane.Toggle('#{uniqueId}', 'pane-hidden', 'pane-slide');
+        });
+
+== NOTE ==
+# CHECK FOR OVERLAPPING ATTRIBUTES.
+# pane_r and pane_l, respectively sets the to 'position:absolute;', 'right:', & 'left:'
+# I could have used 'position:fixed', but I wanted to scroll with the document.
+# The pane 'width:' is in the same .css file for maintance purposes.

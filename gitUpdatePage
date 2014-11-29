@@ -1,0 +1,28 @@
+#!/bin/bash
+#
+clear
+git status
+
+echo ""
+read -p "	Add changed files? (Y or N) " yesorno
+#echo ""
+
+case $yesorno in
+    [Yy])
+        DOTHIS='AddChanged'
+        read -p "	Comments for commit log: " COMMENT
+    ;;
+    [Nn])
+        DOTHIS='DropOut'
+    ;;
+esac
+
+case $DOTHIS in
+    'AddChanged')
+        git commit --all --message "${COMMENT}"
+        git push
+    ;;
+    'DropOut')
+        exit
+    ;;
+esac

@@ -1,0 +1,32 @@
+ <?xml version="1.0" encoding="UTF-8" ?>
+    <widget xmlns = "http://www.w3.org/ns/widgets"
+
+        xmlns:gap   = "http://phonegap.com/ns/1.0"
+        id          = "com.bsdmasterindex.pflogin"
+        version     = "1.0"
+        versionCode = "10" >
+
+        <!-- versionCode is optional and Android only -->
+        <preference name="phonegap-version" value="3.5.0" />
+
+        <name>pf Login</name>
+        <description>
+        An app that creates accounts for login at either firebase.com or parse.com
+        </description>
+        <author href="http://bsdmasterindex.com" email="jessemonroy650@yahoo.com">
+        Jesse Monroy
+        </author>
+
+        <gap:platform name="android" />
+
+        <icon src="res/drawable-mdpi/icon.png" gap:platform="android" gap:qualifier="mdpi" />
+        <icon src="res/drawable-hdpi/icon.png" gap:platform="android" gap:qualifier="hdpi" />
+        <icon src="res/drawable-xhdpi/icon.png" gap:platform="android" gap:qualifier="xhdpi" />
+        <icon src="res/drawable-xxhdpi/icon.png" gap:platform="android" gap:qualifier="xxhdpi" />
+        <icon src="res/drawable-xxxhdpi/icon.png" gap:platform="android" gap:qualifier="xxxhdpi" />
+        <icon src="res/drawable-ldpi/icon.png" gap:platform="android" gap:qualifier="ldpi" />
+
+        <preference name="permissions" value="none"/>
+        <gap:plugin name="org.apache.cordova.network-information" />
+        <gap:plugin name="org.apache.cordova.splashscreen" />
+    </widget>

@@ -1,0 +1,26 @@
+.pane-r {
+/* position & top, set the location */
+position:absolute;
+top:3.1em;  /* This is for the space at the top. */
+right:-90%; /* This sets the pane off the right edge. */
+width: 90%;
+/* transition, slides the pane in and out */
+transition: all 1s ease-in-out;
+-webkit-transition: all 1s ease-in-out; /** Chrome & Safari **/
+}
+
+.pane-l {
+position:absolute;
+top:3.1em;
+left:-90%;
+width: 90%;
+transition: all 1s ease-in-out;
+-webkit-transition: all 1s ease-in-out;
+}
+
+.pane-slide-r {right:0%;}
+.pane-slide-l {left:0%;}
+
+.pane-hidden {visibility:collapse;display:none;}
+/* NOTE: -expose not needed, as that is the default. Here for completeness */
+.pane-expose {visibility:visible;display:block;}
