@@ -121,11 +121,12 @@
 		$('#loginButton').click(function(){
 			console.log('#loginButton:' + $('#email').val() + ':' + $('#password').val());
 			var credintials = { "email": $('#email').val(), "password": $('#password').val()};
-			loginUser(credintials, onGenericSuccess, onLoginError)
+			loginUser(credintials, updateCurrentUser, onLoginError)
 		});
 		$('#logoutButton').click(function(){
 			console.log('#logoutButton:');
 			logout();
+			updateCurrentUser();
 		});
 		$('#registerButton').click(function(){
 			console.log('#registerButton:' + $('#r_email').val() + ':' + $('#r_password').val());
@@ -133,7 +134,7 @@
 								"password": $('#r_password').val(),
 								"phone": $('#r_phonenumber').val()
 								};
-			registerUserNew(credintials, onGenericSuccess, onCreateAccountError)
+			registerUserNew(credintials, updateCurrentUser, onCreateAccountError)
 		});
 		$('#writeData').click(function(){
 			console.log('#writeData');
