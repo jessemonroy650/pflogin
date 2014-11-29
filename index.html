@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>pf Login</title>
+	<meta name="viewport" content="width=device-width">
+	<!-- Resource Information -->
+	<link rel="stylesheet" type="text/css" href=gpsNotepad.css>
+	<link rel="stylesheet" type="text/css" href=messages.css>
+	<link rel="stylesheet" type="text/css" href=faux-sliding-panes.css>
+	<script type="text/javascript" src="cordova.js"></script>
+	<!-- https://cdn.firebase.com/js/client/1.1.1/firebase.js -->
+	<script type="text/javascript" src="js/firebase-2.0.5.js"></script>
+	<script type="text/javascript" src="js/jquery-1.11.0.js"></script>
+	<!-- cloud connection, online status, read/write data -->
+	<script type="text/javascript" src="gpsNotepad-firebase.js"></script>
+	<!-- login, logout, user account, etc. -->
+	<script type="text/javascript" src="gpsNotepad-firebase-user.js"></script>
+    <!-- message.js toggles a "growl" and is tied to messages.css -->
+	<script type="text/javascript" src="messages.js"></script>
+	<script type="text/javascript" src="faux-sliding-panes.js"></script>
+
+	<script type="text/javascript" >
+	</script>
+  </head>
+<body onload="onDeviceReady()">
+	<center>
+	<div id=header class=header>
+		<img id=menubar src=images/3menubars_lightgrey.png>
+		<img id=app_icon src=images/3menubars_white.png>
+		<span id=app_title>App Name
+			<span id=version></span>
+		</span>
+	</div>
+	<div id=message class="info">
+		<h2>Message</h2>
+	</div>
+	<div id=config class="pane-r pane-hidden">
+		<h2>Config</h2>
+		<input type=text id=c_email placeholder=email><br>
+
+	</div>
+	<div id=login class="login">
+		<h2>Login</h2>
+		<input type=text id=email placeholder=email><br>
+		<input type=text id=password placeholder=password><br>
+		<button type=button id=loginButton>Login</button>
+	</div>
+	<div id=register class="register">
+		<h2>Register</h2>
+		<input type=text id=r_email placeholder=email><br>
+		<input type=text id=r_password placeholder=password><br>
+		<input type=text id=r_phonenumber placeholder="phone number"><br>
+		<button type=button id=registerButton>Register</button>
+	</div>
+	<div id=data_wrapper class=data_wrapper>
+		<h2>Data</h2>
+		<div id=data>
+			<input type=text id=data_email placeholder=empty>
+		</div>
+	</div>
+	<button type=button id=trigger>toggle error message</button>
+	<p>&nbsp;<p>
+	<button type=button id=toggle>toggle register message</button>
+	<p>&nbsp;<p>
+	<button type=button id=writeData>Write Data</button>
+	<p>&nbsp;<p>
+	<button type=button id=readData>Read Data</button>
+	<p>&nbsp;<p>
+	<button type=button id=logoutButton>Logout</button>
+	</center>
+
+</body>
+<script type="text/javascript" >
+	//
+	// Cordova is ready
+	//
+	// NOTE: The initialTimeOut is to wait for the GPS to get a decent reading.
+	// NOTE: This need to be in the same scope as the EventListener. 
+	//	It canNOT go in a seperate file.
+	function onDeviceReady() {
+		// Disable buttons until we get gCloudConnected && gLoggedIn
+		$('#status').html("Device Ready.");
+		window.setTimeout(isCloudConnected, 1000);
+		window.setTimeout(isLoggedIn, 1500);
+		/*
+		$('button').prop("disabled", true);
+		window.setTimeout(function() {
+			if ((gCloudConnected) && (gLoggedIn)){
+				$('button').prop("disabled", false);
+			}
+		}, 1600);
+		*/
+		console.log("device ready");
+		//myMessage.Toggle('login');
+		//myMessage.myMessage('message','error', 'Register with your email to get free online storge.', 4000);
+
+		//	Toggle the configuration screen & update the values
+		$('#app_icon').click(function(){
+			console.log('#app_icon');
+			myMessage.Toggle('login');
+		});
+		$('#menubar').click(function(){
+			console.log('#menubar');
+			//myMessage.Toggle('config');
+			SlidingPane.Toggle('#config', 'pane-hidden', 'pane-slide-r');
+		});
+		$('#trigger').click(function(){
+			console.log('#trigger');
+			myMessage.Toggle('message','error');
+		});
+		$('#toggle').click(function(){
+			console.log('#toggle');
+			myMessage.Toggle('register');
+		});
+
+		//
+		//
+		$('#loginButton').click(function(){
+			console.log('#loginButton:' + $('#email').val() + ':' + $('#password').val());
+			var credintials = { "email": $('#email').val(), "password": $('#password').val()};
+			loginUser(credintials, onGenericSuccess, onLoginError)
+		});
+		$('#logoutButton').click(function(){
+			console.log('#logoutButton:');
+			logout();
+		});
+		$('#registerButton').click(function(){
+			console.log('#registerButton:' + $('#r_email').val() + ':' + $('#r_password').val());
+			var credintials = { "email": $('#r_email').val(), 
+								"password": $('#r_password').val(),
+								"phone": $('#r_phonenumber').val()
+								};
+			registerUserNew(credintials, onGenericSuccess, onCreateAccountError)
+		});
+		$('#writeData').click(function(){
+			console.log('#writeData');
+			writeData(gUserDataRef, {'email': 'jesse650@gmail.com', 'phone': '650-630-1142' });
+		});
+		$('#readData').click(function(){
+			console.log('#readData');
+			readData(gUserDataRef, function(dataObj) {
+				console.log(dataObj.email);
+				$('#data').html($('#data').html() + "<p />" + JSON.stringify(dataObj));
+				$('#data_email').val(dataObj.email);
+				// jquery BUG: requires writing after 'fetch HTML and append'
+
+				myMessage.Toggle('data_wrapper');
+			});
+		});
+	}
+	var onGenericSuccess = function () {
+		console.log("onGenericSuccess");
+		// clear fields, scroll up windowpane, scroll down "success" notification"
+	}
+
+	var onGenericError = function () {
+		console.log("onGenericError");
+		// clear fields, scroll up windowpane, scroll down "error" notification"
+	}
+
+	function onLoginError(code) {
+		console.log("Login error:" + JSON.stringify(code));
+		switch (code) {
+			// case error.type:
+			// break;
+			default:
+		}
+	}
+	function onCreateAccountError(code) {
+		console.log("Create Account error:" + JSON.stringify(code));
+		switch (code) {
+			// case error.type:
+			// break;
+			default:
+		}
+	}
+
+</script>
+</html>
