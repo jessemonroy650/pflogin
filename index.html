@@ -29,7 +29,8 @@
 		<img id=menubar src=images/3menubars_lightgrey.png>
 		<img id=app_icon src=images/3menubars_white.png>
 		<span id=app_title>App Name
-			<span id=version></span>
+			<span id=version>1.0</span>
+			<span id="iAm" class="whoiam"></span>
 		</span>
 	</div>
 	<div id=message class="info">
@@ -83,6 +84,7 @@
 		$('#status').html("Device Ready.");
 		window.setTimeout(isCloudConnected, 1000);
 		window.setTimeout(isLoggedIn, 1500);
+		window.setTimeout(updateCurrentUser, 2000);
 		/*
 		$('button').prop("disabled", true);
 		window.setTimeout(function() {
@@ -174,6 +176,14 @@
 			// break;
 			default:
 		}
+	}
+	function updateCurrentUser() {
+		var iAm = whoami();
+		//console.log("iAm:" + iAm);
+		if (! iAm) {
+			iAm = "Not logged in.";	
+		}
+		$('#iAm').text(iAm);		
 	}
 
 </script>

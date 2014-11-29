@@ -52,8 +52,8 @@ function logout() {
 //
 function whoami() {
 	iAm = "";
-	authData = gMybaseRef.getAuth();	
-	if (! authData) {
+	authData = gMybaseRef.getAuth();
+	if (authData) {
 		iAm = JSON.stringify(authData.password.email);
 	}
 	return iAm;
