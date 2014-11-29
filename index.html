@@ -30,7 +30,7 @@
 		<img id=app_icon src=images/3menubars_white.png>
 		<span id=app_title>App Name
 			<span id=version>1.0</span>
-			<span id="iAm" class="whoiam"></span>
+			<span id="iAm" class="whoiam">Not logged in.</span>
 		</span>
 	</div>
 	<div id=message class="info">
@@ -120,8 +120,16 @@
 		//
 		$('#loginButton').click(function(){
 			console.log('#loginButton:' + $('#email').val() + ':' + $('#password').val());
-			var credintials = { "email": $('#email').val(), "password": $('#password').val()};
-			loginUser(credintials, updateCurrentUser, onLoginError)
+			var credintials = { "email": $('#email').val(), "password": $('#password').val() };
+			// The function chaining is a real hack.
+			loginUser(credintials, 
+						function() {
+							updateCurrentUser(
+								function() {
+									myMessage.Toggle('login');
+								}) 
+						},
+						onLoginError)
 		});
 		$('#logoutButton').click(function(){
 			console.log('#logoutButton:');
@@ -178,13 +186,17 @@
 			default:
 		}
 	}
-	function updateCurrentUser() {
+
+	function updateCurrentUser(callback) {
 		var iAm = whoami();
 		//console.log("iAm:" + iAm);
 		if (! iAm) {
 			iAm = "Not logged in.";	
 		}
-		$('#iAm').text(iAm);		
+		$('#iAm').text(iAm);
+		if ( typeof callback === 'function' ) {
+			callback();
+		}
 	}
 
 </script>

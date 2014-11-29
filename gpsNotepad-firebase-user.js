@@ -82,7 +82,7 @@ function loginUser(obj, success, error) {
 			if ( typeof success === 'function' ) {
 				success(authData);
 			}
-			console.log('Authenticated successfully with payload:', JSON.stringify(authData));
+			//console.log('Authenticated successfully with payload:', JSON.stringify(authData));
 		} else {
 			if ( typeof error === 'function' ) {
 				//error(err);
