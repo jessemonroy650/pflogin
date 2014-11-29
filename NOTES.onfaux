@@ -1,5 +1,0 @@
-= NOTES =
-Date: 2014-11-28
-
-# Remember, all <input> elements are global, so set unique id's for all.
-
