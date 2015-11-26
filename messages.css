@@ -1,15 +1,15 @@
 /* From:
-	http://www.red-team-design.com/cool-notification-messages-with-css3-jquery
+    http://www.red-team-design.com/cool-notification-messages-with-css3-jquery
 */
 #message {
-	display:none;
-	visibility:collapse;
-	height:8em;
-	padding:0.1em;
-	margin:0;
-	/* below borrowed idea */
-	border: 3px solid;
-	text-shadow: 0 1px 0 rgba(0,0,0,.5);
+    display:none;
+    visibility:collapse;
+    height:8em;
+    padding:0.1em;
+    margin:0;
+    /* below borrowed idea */
+    border: 3px solid;
+    text-shadow: 0 1px 0 rgba(0,0,0,.5);
 }
 /*
 #message.info {background-color:lightgreen;}
@@ -20,46 +20,46 @@
 #message.warning {background-color: #eaaf51;border-color: #d99a36;}
 
 #config {
-	height:85%;
-	padding:0.1em;
-	margin:0;
-	background-color: #4ea5cd; border-color: #3b8eb5;
-	text-shadow: 0 1px 0 rgba(0,0,0,.5);
+    height:85%;
+    padding:0.1em;
+    margin:0;
+    background-color: #4ea5cd; border-color: #3b8eb5;
+    text-shadow: 0 1px 0 rgba(0,0,0,.5);
 }
 #config.config {background-color: #4ea5cd; border-color: #3b8eb5;}
 
 #login {
-	display:none;
-	visibility:collapse;
-	height:8em;
-	padding:0.1em;
-	margin:0;
-	/* below borrowed idea */
-	border: 3px solid;
-	text-shadow: 0 1px 0 rgba(0,0,0,.5);
+    display:none;
+    visibility:collapse;
+    height:8em;
+    padding:0.1em;
+    margin:0;
+    /* below borrowed idea */
+    border: 3px solid;
+    text-shadow: 0 1px 0 rgba(0,0,0,.5);
 }
 #login.login {background-color: #61b832;border-color: #55a12c;}
 
 #register {
-	display:none;
-	visibility:collapse;
-	height:8em;
-	padding:0.1em;
-	margin:0;
-	/* below borrowed idea */
-	border: 3px solid;
-	text-shadow: 0 1px 0 rgba(0,0,0,.5);
+    display:none;
+    visibility:collapse;
+    height:8em;
+    padding:0.1em;
+    margin:0;
+    /* below borrowed idea */
+    border: 3px solid;
+    text-shadow: 0 1px 0 rgba(0,0,0,.5);
 }
 #register.register {background-color: #eaaf51;border-color: #d99a36;}
 
 #data_wrapper {
-	display:none;
-	visibility:collapse;
-	height:8em;
-	padding:0.1em;
-	margin:0;
-	/* below borrowed idea */
-	border: 3px solid;
-	text-shadow: 0 1px 0 rgba(0,0,0,.5);
+    display:none;
+    visibility:collapse;
+    height:8em;
+    padding:0.1em;
+    margin:0;
+    /* below borrowed idea */
+    border: 3px solid;
+    text-shadow: 0 1px 0 rgba(0,0,0,.5);
 }
 #data_wrapper.data_wrapper {background-color: #61b832;border-color: #55a12c;}

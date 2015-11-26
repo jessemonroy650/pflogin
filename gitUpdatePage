@@ -12,6 +12,10 @@ case $yesorno in
         DOTHIS='AddChanged'
         read -p "	Comments for commit log: " COMMENT
     ;;
+    yes|YES)
+        DOTHIS='AddChanged'
+        read -p "	Comments for commit log: " COMMENT
+    ;;
     [Nn])
         DOTHIS='DropOut'
     ;;
